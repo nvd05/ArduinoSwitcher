@@ -9,5 +9,5 @@
 ```
 
 ## Инициализация пинов
-* <PinListener> 66
-* <PinSwitcher> 67
+* 66 <class PinListener>
+* 67 <class PinSwitcher>
