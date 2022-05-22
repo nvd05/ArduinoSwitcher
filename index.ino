@@ -74,7 +74,7 @@ public:
 
 #pragma region Обьявление пинов
 	PinListener pin_listener(13);
-	PinSwitcher pin_switcher(12);
+	PinSwitcher pin_switcher(12, 5000);
 #pragma endregion
 
 void setup()
