@@ -9,7 +9,7 @@ protected:
 	void update(int signal, int milliseconds)
 	{
 		#pragma region debugger
-		Serial.println("voltage: " + String(signal) + ", millis: " + String(milliseconds));
+		Serial.println("voltage: " + String(signal) + ", milliseconds: " + String(milliseconds));
 		Serial.println();
 		#pragma endregion
 	}
@@ -48,7 +48,7 @@ private:
 	int _pin;
 
 public:
-	void update()
+	void inverse()
 	{
 		if (millis() % _milliseconds != 0)
 		{
@@ -72,8 +72,10 @@ public:
 	}
 };
 
-PinListener pin1(13);
-PinSwitcher pin2(12);
+#pragma region Обьявление пинов
+	PinListener pin_listener(13);
+	PinSwitcher pin_switcher(12);
+#pragma endregion
 
 void setup()
 {
@@ -85,7 +87,9 @@ void setup()
 
 void loop()
 {
-	pin1.listen();
-	pin2.update();
+	pin_listener.listen();
+	pin_switcher.inverse();
+
+	// Данная строка необходима для избежания багов
 	delay(1);
 }
