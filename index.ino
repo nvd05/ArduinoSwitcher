@@ -8,8 +8,10 @@ private:
 protected:
 	void update(int signal, int milliseconds)
 	{
+		#pragma region debugger
 		Serial.println("voltage: " + String(signal) + ", millis: " + String(milliseconds));
 		Serial.println();
+		#pragma endregion
 	}
 
 public:
@@ -41,24 +43,31 @@ class PinSwitcher
 {
 private:
 	bool _active;
+
+	int _milliseconds;
 	int _pin;
 
 public:
 	void update()
 	{
-		if (millis() % 5000 != 0)
+		if (millis() % _milliseconds != 0)
 		{
 			return;
 		}
 
+		#pragma region debugger
 		Serial.println("[" + String(_pin) + "] switch: " + String(_active));
+		#pragma endregion
+
 		digitalWrite(_pin, _active);
 		_active = !_active;
 	}
 
-	PinSwitcher(int pin)
+	PinSwitcher(int pin, int milliseconds)
 	{
 		pinMode(pin, OUTPUT);
+
+		_milliseconds = milliseconds;
 		_pin = pin;
 	}
 };
@@ -68,8 +77,10 @@ PinSwitcher pin2(12);
 
 void setup()
 {
+	#pragma region debugger
 	Serial.begin(9600);
 	Serial.println("running...");
+	#pragma endregion
 }
 
 void loop()
